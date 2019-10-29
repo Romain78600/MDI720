@@ -54,6 +54,44 @@ On conclut que:
 \end{lflalign}
 
 
+\vspace{5mm}
+
+14) Dans le cas du modèle de régression avec design déterministe où X est de plein rang p, donner la valeur du risque de prédiction. \\
+
+$$ Rpred(\hat{\theta}_n) = E\left[\| Y^* - \hat{Y} \|^2_2\right] $$
+$$ Rpred(\hat{\theta}_n)  = E\left[\| X(\hat{\theta}_n - \theta^*) \|^2_2\right] $$
+$$ Rpred(\hat{\theta}_n) = E \left[ \| X(X^TX)^{-1}X^T \epsilon \|^2_2 \right] $$
+On pose $H_x = X(X^TX)^{-1}X^T$, on remarque que $H_x$ est un projecteur orthogonal et on écrit :
+$$ Rpred(\hat{\theta}_n) = E\left[ \epsilon^TH_x\epsilon \right]$$
+$$ = E\left[ tr(H_x \epsilon \epsilon^T)\right]$$
+$$ = tr(H_x E(\epsilon\epsilon^T) $$ Comme $Cov(\epsilon) = \sigma^2 I_n$
+$$ = \sigma^2 tr(H_x)$$
+
+Comme $H_x$ est un projecteur orthogonal on a :
+\smallbreak
+$$
+\begin{cases}
+    H_x^T = H_x  \\
+    H_x^2 = H_x
+\end{cases} $$
+
+Donc les valeurs propres de $\lambda_i$ de $H_x$ on pour propriété : 
+$$\lambda_i^2 = \lambda_i \Longleftrightarrow 
+\begin{cases}
+    \lambda_i = 0  \\
+    \lambda_i = 1
+\end{cases} $$
+
+Ainsi : 
+$$ Rpred = \sigma^2 tr(H_x)$$
+$$ = \sigma^2 \sum^n_{k=1} \lambda_k$$ avec $\lambda_k$ les vp de $H_x$
+$$ = \sigma^2 rang(H_x)$$
+
+Avec l'hypothèse de rang plein $Ker(X) = \{0\}$ on a :
+$$dim(Vect(X)) = p$$
+$H_x$ étant le projecteur orthgonal sur Vect(X), on obtient $rang(H_x) = p$
+donc 
+$$Rpred(\hat{\theta}_n) = \sigma^2 p$$
 
 
 
