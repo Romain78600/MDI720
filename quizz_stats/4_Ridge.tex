@@ -1,0 +1,39 @@
+\vspace{5mm}
+
+{\fontsize{12pt}{22pt} \textbf{4. Ridge:}\par}
+
+\vspace{5mm}
+
+On note $\hat \theta = {\rm arg} \displaystyle\min_{\theta} \frac{1}{2}\| \mathbf{y} -X \theta \|_2^2+ \frac{\lambda}{2}\|\theta\|_2^2$ l’estimateur Ridge
+
+3) Donner la variance de l'estimateur Ridge sous l’hypothèse que le bruit $\mathbf{y} -X \theta^*$ est centré et de variance $\sigma^2 {\rm Id}_n$.
+
+$$\hat \theta_{\lambda}^{rdg} = (X^\top X+\lambda Id_p)^{-1}X^\top Y$$
+$$Var(\hat \theta_{\lambda}^{rdg}) = Var((X^\top X+\lambda Id_p)^{-1}X^\top Y)$$ 
+$$ = ((X^\top X+\lambda Id_p)^{-1}X^\top) Var(Y) ((X^\top X+\lambda Id_p)^{-1}X^\top)^\top$$ 
+$$ = (X^\top X+\lambda Id_p)^{-1}X^\top Var(X \theta^\star + \epsilon)X(X^\top X+\lambda Id_p)^{-1}$$ 
+$$ = (X^\top X+\lambda Id_p)^{-1}X^\top Var(\epsilon)X(X^\top X+\lambda Id_p)^{-1}$$ 
+$$ = \sigma^2 (X^\top X+\lambda Id_p)^{-1}X^\top X(X^\top X+\lambda Id_p)^{-1}$$ 
+
+En remarquant que $X^\top X$ et $(X^\top X+\lambda Id_p)^{-1}$ sont diagonalisables dans la même base, on pose:
+
+$$(X^\top X+\lambda Id_p)^{-1} = PA^{-1}P^{-1}$$
+$$X^\top X = PBP^{-1}$$
+
+Avec $A^{-1}$ et $B$ deux matrices diagonales.
+
+On a alors:
+
+$$Var(\hat \theta_{\lambda}^{rdg}) = \sigma^2PA^{-1}P^{-1}PBP^{-1}PA^{-1}P^{-1}$$
+$$ = \sigma^2PA^{-1}BA^{-1}P^{-1}$$
+$$ = \sigma^2PA^{-1}A^{-1}BP^{-1}$$
+$$ = \sigma^2PA^{-1}Id_pA^{-1}Id_pBP^{-1}$$
+$$ = \sigma^2PA^{-1}P^{-1}PA^{-1}P^{-1}PBP^{-1}$$
+$$ = \sigma^2 (X^\top X+\lambda Id_p)^{-1} (X^\top X+\lambda Id_p)^{-1}X^\top X$$
+$$ = \sigma^2 (X^\top X+\lambda Id_p)^{-2} X^\top X$$
+
+
+
+
+
+
