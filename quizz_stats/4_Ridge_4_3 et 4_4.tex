@@ -1,0 +1,134 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+
+
+\date{November 2019}
+
+\begin{document}
+
+\maketitle
+
+\textbf{Quizz MDI 720: 4. Ridge}
+
+\vspace{5mm}
+
+
+
+
+\vspace{5mm}
+
+On note $\hat \theta = {\rm arg} \displaystyle\min_{\theta} \frac{1}{2}\| \mathbf{y} -X \theta \|_2^2+ \frac{\lambda}{2}\|\theta\|_2^2$ l’estimateur Ridge
+
+3) Donner la variance de l'estimateur Ridge sous l’hypothèse que le bruit $\mathbf{y} -X \theta^*$ est centré et de variance $\sigma^2 {\rm Id}_n$.
+
+$$\hat \theta_{\lambda}^{rdg} = (X^\top X+\lambda Id_p)^{-1}X^\top Y$$
+$$Var(\hat \theta_{\lambda}^{rdg}) = Var((X^\top X+\lambda Id_p)^{-1}X^\top Y)$$ 
+$$ = ((X^\top X+\lambda Id_p)^{-1}X^\top) Var(Y) ((X^\top X+\lambda Id_p)^{-1}X^\top)^\top$$ 
+$$ = (X^\top X+\lambda Id_p)^{-1}X^\top Var(X \theta^\star + \epsilon)X(X^\top X+\lambda Id_p)^{-1}$$ 
+$$ = (X^\top X+\lambda Id_p)^{-1}X^\top Var(\epsilon)X(X^\top X+\lambda Id_p)^{-1}$$ 
+$$ = \sigma^2 (X^\top X+\lambda Id_p)^{-1}X^\top X(X^\top X+\lambda Id_p)^{-1}$$ 
+
+En remarquant que $X^\top X$ et $(X^\top X+\lambda Id_p)^{-1}$ sont diagonalisables dans la même base, on pose:
+
+$$(X^\top X+\lambda Id_p)^{-1} = PA^{-1}P^{-1}$$
+$$X^\top X = PBP^{-1}$$
+
+Avec $A^{-1}$ et $B$ deux matrices diagonales.
+
+On a alors:
+
+$$Var(\hat \theta_{\lambda}^{rdg}) = \sigma^2PA^{-1}P^{-1}PBP^{-1}PA^{-1}P^{-1}$$
+$$ = \sigma^2PA^{-1}BA^{-1}P^{-1}$$
+$$ = \sigma^2PA^{-1}A^{-1}BP^{-1}$$
+$$ = \sigma^2PA^{-1}Id_pA^{-1}Id_pBP^{-1}$$
+$$ = \sigma^2PA^{-1}P^{-1}PA^{-1}P^{-1}PBP^{-1}$$
+$$ = \sigma^2 (X^\top X+\lambda Id_p)^{-1} (X^\top X+\lambda Id_p)^{-1}X^\top X$$
+$$ = \sigma^2 (X^\top X+\lambda Id_p)^{-2} X^\top X$$
+
+4) Donner en fonction de X,y,D \in {\Re}^p^*^p  et $\lambda$ une formule  explicite de :$$
+
+$\hat \theta={\rm arg} \displaystyle\min_{\theta} \frac{1}{2}\| \mathbf{y} -X \theta \|_2^2+ \frac{\lambda}{2}\|D\theta\|_2^2$$
+
+Posons f($\theta) = \frac{1}{2}\| \mathbf{y} -X \theta \|_2^2+ \frac{\lambda}{2}\|D\theta\|_2^2$$
+
+       $$ = \frac{1}{2}\| \mathbf{y}\|^2 - \langle \theta,X^\top y \rangle + \frac{1}{2} (\theta)^\top X^\top X (\theta)$$
+       
+Si  \nabla f($\theta$) est le gradient de f($\theta$) alors:
+
+
+f($\theta$ + h)=f($\theta$) +\langle h,\nabla f($\theta$) \rangle  + o(h)   \hspace{5mm} (a)
+
+
+Développons:$$
+
+f($\theta+ h)= \frac{1}{2}\| \mathbf{y}\|^2 - \langle \theta+h,X^\top y \rangle + \frac{1}{2} (\theta+h)^\top X^\top X (\theta+h)+ \frac{\lambda}{2}(\theta+h)^\top D^\top D (\theta+h)$$
+
+$$=\frac{1}{2}\| \mathbf{y}\|^2-\langle \theta,X^\top y \rangle - \langle h,X^\top y \rangle$$
+$$+\frac{1}{2} \theta^\top X^\top X \theta+\frac{1}{2} h^\top X^\top X \theta$$
+$$+\frac{1}{2} \theta^\top X^\top X h+\frac{1}{2} h^\top X^\top X h $$
+$$+ \frac{\lambda}{2} \theta^\top D^\top D \theta+\frac{\lambda}{2} \theta^\top D^\top D h$$
+$$+\frac{\lambda}{2} h^\top D^\top D \theta +\frac{\lambda}{2} h^\top D^\top D h
+
+Après regroupement approprié nous avons:$$
+
+f($\theta+ h)= f(\theta)+\langle h,X^\top X \theta+$$
+$$\lambda D^\top D \theta - X^\top y \rangle$$
+$$+(\theta^\top X^\top X+h^\top X^\top X+\lambda h^\top D^\top D )\frac{h}{2}$$  \hspace{5mm} (b)
+
+En comparant (a) et (b) nous avons par identification:
+
+\nabla f($\theta) = X^\top X \theta + \lambda D^\top D \theta - X^\top y 
+
+$$$\nabla f($\hat \theta)=0$$ \hspace{5mm} équivaut \hspace{5mm} à :$$
+
+$$(X^\top X + \lambda D^\top D)\hat \theta= X^\top y 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
