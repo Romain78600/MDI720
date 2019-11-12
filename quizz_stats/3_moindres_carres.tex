@@ -4,10 +4,36 @@
 
 \vspace{5mm}
 
+1) Ecrire un pseudo-code de descente de gradient pour résoudre le problème des moindres carrés.  \vspace{2mm}
+\underline{Initialisation} \\
+$(\theta_0^0, \theta_1^0)$: valeurs initiales de $\theta$ \\
+$T$: nombre maximum d'itérations \\
+$\varepsilon$: critère d'arrêt \\
+$\alpha$: pas de l'algorithme \\
+
+\underline{Boucle} \\
+for $1 \leq t \leq T$: \\ \\
+\phantom{a} \hspace{4mm} $(\theta_0^{t+1}, \theta_1^{t+1}) := (\theta_0^{t+1}, \theta_1^{t+1}) - \alpha . \nabla f(\theta_0^{t}, \theta_1^{t})$ \\
+\phantom{a} \hspace{4mm} avec (selon le cours) $\nabla f(\theta_0^{t}, \theta_1^{t}) = X^T (X \theta - Y)$ \\ \\
+\phantom{a} \hspace{4mm} soit (en utilisant la fonction de la question 2.2): \\
+\phantom{a} \hspace{4mm} $\theta_0^{t+1} := \theta_0^t + \alpha \ssumm{i=1}{n} (y_i - \theta_0 - \theta_1 x_i)$ \\
+\phantom{a} \hspace{4mm} $\theta_1^{t+1} := \theta_1^t + \alpha \ssumm{i=1}{n} x_i (y_i - \theta_0 - \theta_1 x_i)$ \\ \\
+\phantom{a} \hspace{4mm} Stop si critère inférieur à $\varepsilon$ \\ \\
+Fin de la boucle \\ \\
+Return $(\theta_0^T, \theta_1^T)$ \\
+
+Critères d'arrêt possibles: \\
+$\| \nabla f(\theta_0^{t}, \theta_1^{t}) \| \leq \varepsilon$ \\
+$| f(\theta_0^{t+1}, \theta_1^{t+1}) - f(\theta_0^{t}, \theta_1^{t}) | \leq \varepsilon$ \\
+$ \| \theta^{t+1} - \theta^{t} \| \leq \varepsilon$ \hspace{5mm} avec $\theta = (\theta_0, \theta_1)$ \\
+$ \frac{\| \theta^{t+1} - \theta^{t} \|}{\| \theta^{t} \|} \leq \varepsilon$ \hspace{5mm} avec $\theta = (\theta_0, \theta_1)$
+\vspace{5mm}
+
+
 10)  On suppose que X est de rang plein et on note $\hat{\theta}$ l’estimateur OLS. On note $\tilde{X}=(X_1,\hdots,X_p)$.On change l’échelle d’une des variables: $X_k$ est remplacé par $X_k b$, où $b>0$. \\
 a) Soit $X_b=(1, X_1,\hdots, X_k b, \hdots, X_p)$. Montrer que $X_b = X D$ où $D$ est une matrice diagonale que l’on précisera. \\
 On utilise simplement la définition de $X_b$ pour obtenir: \\
-$X_b 
+$X_b
 = \left( \begin{matrix} 1 & X_1 & \hdots & X_k b & \hdots & X_p \end{matrix} \right)
 = \left( \begin{matrix} 1 \times 1 & 1 \times X_1 & \hdots & b \times X_k & \hdots & 1 \times X_p \end{matrix} \right)$ \\
 $ \left( \begin{matrix} 1 & X_1 & \hdots & X_k & \hdots & X_p \end{matrix} \right) \times
@@ -43,7 +69,7 @@ $\frac{1}{2} (y-X \theta)^T \Omega (y-X \theta)
 Pour trouver l'argmin, on utilisera les règles suivantes de dérivées matricielles:\\
 - Si $a$ et $b$ sont des vecteurs, on a: $\frac{\partial b^T a}{\partial b} = a$. Cela implique que: $\frac{\partial 2 \theta^T X^T \Omega y}{\partial \theta} = 2 X^T \Omega y$. \\
 - Si $A$ est une matrice symétrique et $b$ un vecteur, on a: $\frac{\partial b^T A b}{\partial b} = 2 A b$. Cela implique que: $\frac{\partial \theta^T X^T \Omega X \theta}{\partial \theta} = 2 X^T \Omega X \theta$. \\
-On conclut que: 
+On conclut que:
 \begin{lflalign}
 & \ \frac{\partial }{\partial \theta}\left( \ \frac{1}{2} (y-X \theta)^T \Omega (y-X \theta) \right)=0 \nonumber \\
 \Leftrightarrow \ & \ \frac{\partial }{\partial \theta} \left( \frac{1}{2} \left[ y^T \Omega y + \theta^T X^T \Omega X \theta - 2 \theta^T X^T \Omega y \right] \right)=0 \nonumber \\
@@ -67,7 +93,7 @@ On conclut que:
 
 \bigskip
 
-\begin{itemize} 
+\begin{itemize}
 	\item \textit{Mod\'ele gaussien}
 \end{itemize}
 
@@ -101,7 +127,7 @@ $$ \sqrt{n} (\beta - \beta^{*}) \rightarrow  \mathcal{N}(0, \sigma V_X^{-1} )$$
 
 \bigskip
 
-\begin{itemize} 
+\begin{itemize}
 	\item \textit{Mod\'ele d\'esign al\'eatoire}
 \end{itemize}
 
@@ -164,14 +190,14 @@ $$
     H_x^2 = H_x
 \end{cases} $$
 
-Donc les valeurs propres de $\lambda_i$ de $H_x$ on pour propriété : 
-$$\lambda_i^2 = \lambda_i \Longleftrightarrow 
+Donc les valeurs propres de $\lambda_i$ de $H_x$ on pour propriété :
+$$\lambda_i^2 = \lambda_i \Longleftrightarrow
 \begin{cases}
     \lambda_i = 0  \\
     \lambda_i = 1
 \end{cases} $$
 
-Ainsi : 
+Ainsi :
 $$ Rpred = \sigma^2 tr(H_x)$$
 $$ = \sigma^2 \sum^n_{k=1} \lambda_k$$ avec $\lambda_k$ les vp de $H_x$
 $$ = \sigma^2 rang(H_x)$$
@@ -179,7 +205,7 @@ $$ = \sigma^2 rang(H_x)$$
 Avec l'hypothèse de rang plein $Ker(X) = \{0\}$ on a :
 $$dim(Vect(X)) = p$$
 $H_x$ étant le projecteur orthgonal sur Vect(X), on obtient $rang(H_x) = p$
-donc 
+donc
 $$Rpred(\hat{\theta}_n) = \sigma^2 p$$
 
 
