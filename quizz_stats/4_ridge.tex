@@ -70,6 +70,39 @@ $$ = \sigma^2 (X^\top X+\lambda Id_p)^{-1} (X^\top X+\lambda Id_p)^{-1}X^\top X$
 $$ = \sigma^2 (X^\top X+\lambda Id_p)^{-2} X^\top X$$
 
 
+4) Donner en fonction de X,y,D $\in {\Re}^{p*p}$  et $\lambda$ une formule  explicite de :
+
+$$\hat \theta={\rm arg} \displaystyle\min_{\theta} \frac{1}{2}\| \mathbf{y} -X \theta \|_2^2+ \frac{\lambda}{2}\|D\theta\|_2^2$$
+
+Posons $$ f(\theta) = \frac{1}{2}\| \mathbf{y} -X \theta \|_2^2+ \frac{\lambda}{2}\|D\theta\|_2^2 = \frac{1}{2}\| \mathbf{y}\|^2 - \langle \theta,X^\top y \rangle + \frac{1}{2} (\theta)^\top X^\top X (\theta)$$
+       
+Si  $\nabla f(\theta)$ est le gradient de $f(\theta)$ alors:
+
+
+$$f(\theta + h)=f(\theta) +\langle h,\nabla f(\theta) \rangle  + o(h)   \hspace{5mm} \hspace{5mm} (a)$$ 
+
+
+Développons:
+
+$$f(\theta+ h)= \frac{1}{2}\| \mathbf{y}\|^2 - \langle \theta+h,X^\top y \rangle + \frac{1}{2} (\theta+h)^\top X^\top X (\theta+h)+ \frac{\lambda}{2}(\theta+h)^\top D^\top D (\theta+h)$$
+
+$$=\frac{1}{2}\| \mathbf{y}\|^2-\langle \theta,X^\top y \rangle - \langle h,X^\top y \rangle$$
+$$+\frac{1}{2} \theta^\top X^\top X \theta+\frac{1}{2} h^\top X^\top X \theta$$
+$$+\frac{1}{2} \theta^\top X^\top X h+\frac{1}{2} h^\top X^\top X h $$
+$$+ \frac{\lambda}{2} \theta^\top D^\top D \theta+\frac{\lambda}{2} \theta^\top D^\top D h$$
+$$+\frac{\lambda}{2} h^\top D^\top D \theta +\frac{\lambda}{2} h^\top D^\top D h$$
+
+Après regroupement approprié nous avons:
+
+$$f(\theta+ h)= f(\theta)+\langle h,X^\top X \theta+\lambda D^\top D \theta - X^\top y \rangle+(\theta^\top X^\top X+h^\top X^\top X+\lambda h^\top D^\top D )\frac{h}{2} \hspace{5mm} (b)$$
+
+En comparant (a) et (b) nous avons par identification:
+
+$$\nabla f(\theta) = X^\top X \theta + \lambda D^\top D \theta - X^\top y $$
+
+$$\nabla f(\hat \theta)=0$$ équivaut à :
+
+$$(X^\top X + \lambda D^\top D)\hat \theta= X^\top y$$ 
 
 
 
